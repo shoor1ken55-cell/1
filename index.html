@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>дИИво</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 3s infinite;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #000;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .brand-name {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-text {
+            font-size: 16px;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-text:hover {
+            border-color: #764ba2;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Video Section */
+        .video-section {
+            margin-top: 100px;
+            padding: 40px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            background: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 40px;
+            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .pricing-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .plan-name {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+        }
+
+        .pricing-features li::before {
+            content: '—';
+            margin-right: 10px;
+            color: #764ba2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .brand-name {
+                font-size: 24px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .social-icon {
+                width: 30px;
+                height: 30px;
+            }
+
+            .video-section {
+                padding: 20px;
+            }
+
+            .pricing-title {
+                font-size: 36px;
+            }
+
+            .plan-name {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo"></div>
+            <span class="brand-name">дИИво</span>
+        </div>
+        <nav>
+            <a href="#pricing" class="nav-text">Цены</a>
+            <a href="https://t.me/" target="_blank" class="social-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+                </svg>
+            </a>
+            <a href="https://instagram.com/" target="_blank" class="social-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+                </svg>
+            </a>
+            <a href="https://vk.com/" target="_blank" class="social-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.576-1.496c.588-.19 1.341 1.26 2.14 1.818.605.422 1.064.33 1.064.33l2.137-.03s1.117-.071.587-.964c-.043-.073-.308-.661-1.588-1.87-1.34-1.264-1.16-1.059.453-3.246.983-1.332 1.376-2.145 1.253-2.493-.117-.332-.84-.244-.84-.244l-2.406.015s-.178-.025-.31.056c-.13.079-.212.262-.212.262s-.382 1.03-.89 1.907c-1.07 1.85-1.501 1.95-1.676 1.836-.407-.267-.305-1.075-.305-1.648 0-1.793.267-2.54-.521-2.733-.262-.065-.454-.107-1.123-.114-.858-.009-1.585.003-1.996.208-.274.136-.485.44-.356.457.159.022.519.099.71.364.246.342.237 1.113.237 1.113s.142 2.12-.33 2.384c-.326.182-.77-.19-1.725-1.865-.489-.857-.858-1.807-.858-1.807s-.07-.18-.198-.276c-.155-.118-.37-.155-.37-.155l-2.286.015s-.343.01-.469.162c-.112.135-.009.414-.009.414s1.792 4.266 3.817 6.413c1.858 1.97 3.968 1.84 3.968 1.84h.957z"/>
+                </svg>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="video-grid">
+            <div class="video-container">
+                <iframe src="https://vk.com/video_ext.php?oid=-232803295&id=456239018&hd=2&autoplay=1&mute=1&loop=1" 
+                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" 
+                        allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe src="https://vk.com/video_ext.php?oid=-232803295&id=456239018&hd=2&autoplay=1&mute=1&loop=1" 
+                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" 
+                        allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe src="https://vk.com/video_ext.php?oid=-232803295&id=456239018&hd=2&autoplay=1&mute=1&loop=1" 
+                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" 
+                        allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe src="https://vk.com/video_ext.php?oid=-232803295&id=456239018&hd=2&autoplay=1&mute=1&loop=1" 
+                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" 
+                        allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe src="https://vk.com/video_ext.php?oid=-232803295&id=456239018&hd=2&autoplay=1&mute=1&loop=1" 
+                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" 
+                        allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe src="https://vk.com/video_ext.php?oid=-232803295&id=456239018&hd=2&autoplay=1&mute=1&loop=1" 
+                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" 
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="pricing-container">
+            <h2 class="pricing-title">Тарифы</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3 class="plan-name">Старт</h3>
+                    <ul class="pricing-features">
+                        <li>Базовый функционал</li>
+                        <li>Поддержка 24/7</li>
+                        <li>До 10 проектов</li>
+                        <li>Обучающие материалы</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="plan-name">Отрыв</h3>
+                    <ul class="pricing-features">
+                        <li>Расширенный функционал</li>
+                        <li>Приоритетная поддержка</li>
+                        <li>До 50 проектов</li>
+                        <li>Персональный менеджер</li>
+                        <li>Аналитика и отчеты</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="plan-name">Полёт</h3>
+                    <ul class="pricing-features">
+                        <li>Все возможности платформы</li>
+                        <li>VIP поддержка</li>
+                        <li>Безлимитные проекты</li>
+                        <li>Индивидуальные решения</li>
+                        <li>API доступ</li>
+                        <li>Приоритетные обновления</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
