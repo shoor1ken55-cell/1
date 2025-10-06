@@ -41,8 +41,6 @@
         .logo {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -50,14 +48,10 @@
             animation: pulse 3s infinite;
         }
 
-        .logo::before {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: #000;
-            border-radius: 50%;
-            opacity: 0.5;
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         @keyframes pulse {
@@ -174,11 +168,22 @@
         .pricing-title {
             text-align: center;
             font-size: 48px;
-            margin-bottom: 60px;
+            margin-bottom: 20px;
             background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
         .pricing-cards {
@@ -223,6 +228,16 @@
         .plan-name {
             font-size: 32px;
             font-weight: bold;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .plan-price {
+            font-size: 28px;
+            font-weight: bold;
             margin-bottom: 30px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
@@ -245,6 +260,46 @@
             content: '—';
             margin-right: 10px;
             color: #764ba2;
+        }
+
+        .pricing-disclaimer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 40px 20px 40px;
+            background: #000;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #764ba2;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
         }
 
         /* Responsive */
@@ -277,6 +332,10 @@
             .plan-name {
                 font-size: 28px;
             }
+
+            .plan-price {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -284,7 +343,9 @@
     <!-- Header -->
     <header>
         <div class="logo-container">
-            <div class="logo"></div>
+            <div class="logo">
+                <img src="https://gifyu.com/image/bwR6X" alt="дИИво logo">
+            </div>
             <span class="brand-name">дИИво</span>
         </div>
         <nav>
@@ -417,9 +478,11 @@
     <section class="pricing-section" id="pricing">
         <div class="pricing-container">
             <h2 class="pricing-title">Тарифы</h2>
+            <p class="pricing-subtitle">Оплата после согласования всех деталей. Результат работы - 100% соответствие Вашему запросу!</p>
             <div class="pricing-cards">
                 <div class="pricing-card">
                     <h3 class="plan-name">Старт</h3>
+                    <div class="plan-price">3 000 рублей</div>
                     <ul class="pricing-features">
                         <li>Базовый функционал</li>
                         <li>Поддержка 24/7</li>
@@ -429,6 +492,7 @@
                 </div>
                 <div class="pricing-card">
                     <h3 class="plan-name">Отрыв</h3>
+                    <div class="plan-price">50 000 рублей</div>
                     <ul class="pricing-features">
                         <li>Расширенный функционал</li>
                         <li>Приоритетная поддержка</li>
@@ -439,6 +503,7 @@
                 </div>
                 <div class="pricing-card">
                     <h3 class="plan-name">Полёт</h3>
+                    <div class="plan-price">100 000 рублей</div>
                     <ul class="pricing-features">
                         <li>Все возможности платформы</li>
                         <li>VIP поддержка</li>
@@ -449,7 +514,20 @@
                     </ul>
                 </div>
             </div>
+            <p class="pricing-disclaimer">Не производим контент, нарушающий законы РФ</p>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy">Политика конфиденциальности</a>
+                <a href="#terms">Пользовательское соглашение</a>
+                <a href="#contact">Контакты</a>
+            </div>
+            <p class="footer-text">© 2025 дИИво. Все права защищены.</p>
+        </div>
+    </footer>
 </body>
 </html>
