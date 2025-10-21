@@ -612,16 +612,6 @@
         </div>
         <nav>
             <a href="#pricing" class="nav-text">Цены</a>
-            <a href="mailto:info@diivo.fun" class="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-            </a>
-            <a href="https://dzen.ru/diivo_fun" target="_blank" class="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                    <path d="M21.5 10.8v2.4l-8.5 8.3-8.5-8.3V10.8L12 2.5l9.5 8.3z"/>
-                </svg>
-            </a>
             <a href="https://t.me/diivo_fun/" target="_blank" class="social-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
@@ -630,6 +620,11 @@
             <a href="https://vk.com/diivo_fun/" target="_blank" class="social-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                     <path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.576-1.496c.588-.19 1.341 1.26 2.14 1.818.605.422 1.064.33 1.064.33l2.137-.03s1.117-.071.587-.964c-.043-.073-.308-.661-1.588-1.87-1.34-1.264-1.16-1.059.453-3.246.983-1.332 1.376-2.145 1.253-2.493-.117-.332-.84-.244-.84-.244l-2.406.015s-.178-.025-.31.056c-.13.079-.212.262-.212.262s-.382 1.03-.89 1.907c-1.07 1.85-1.501 1.95-1.676 1.836-.407-.267-.305-1.075-.305-1.648 0-1.793.267-2.54-.521-2.733-.262-.065-.454-.107-1.123-.114-.858-.009-1.585.003-1.996.208-.274.136-.485.44-.356.457.159.022.519.099.71.364.246.342.237 1.113.237 1.113s.142 2.12-.33 2.384c-.326.182-.77-.19-1.725-1.865-.489-.857-.858-1.807-.858-1.807s-.07-.18-.198-.276c-.155-.118-.37-.155-.37-.155l-2.286.015s-.343.01-.469.162c-.112.135-.009.414-.009.414s1.792 4.266 3.817 6.413c1.858 1.97 3.968 1.84 3.968 1.84h.957z"/>
+                </svg>
+            </a>
+            <a href="https://dzen.ru/diivo_fun" target="_blank" class="social-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M21.5 10.8v2.4l-8.5 8.3-8.5-8.3V10.8L12 2.5l9.5 8.3z"/>
                 </svg>
             </a>
         </nav>
@@ -718,7 +713,7 @@
             <div class="footer-links">
                 <a href="#privacy">Политика конфиденциальности</a>
                 <a href="#terms">Пользовательское соглашение</a>
-                <a href="#contact">Контакты</a>
+                <a href="mailto:info@diivo.fun">info@diivo.fun</a>
             </div>
             <p class="footer-text">© 2025 дИИво. Все права защищены.</p>
         </div>
@@ -750,28 +745,24 @@
         ];
 
         let videosLoaded = 0;
-        const videosPerLoad = 4; // Load 4 videos at a time
+        const videosPerLoad = 4;
         const videoGrid = document.getElementById('videoGrid');
         const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-        // Function to create video container with lazy loading
         function createVideoContainer(video, index) {
             const container = document.createElement('div');
             container.className = 'video-container';
             container.dataset.videoIndex = index;
             
-            // Create thumbnail placeholder
             const thumbnail = document.createElement('div');
             thumbnail.className = 'video-thumbnail';
             container.appendChild(thumbnail);
             
-            // Loading text
             const loadingText = document.createElement('div');
             loadingText.className = 'loading-text';
             loadingText.textContent = 'Загрузка...';
             container.appendChild(loadingText);
             
-            // Load video on click or when visible
             container.addEventListener('click', function() {
                 loadVideo(container, video);
             });
@@ -779,9 +770,8 @@
             return container;
         }
 
-        // Function to load the actual video
         function loadVideo(container, video) {
-            if (container.querySelector('iframe')) return; // Already loaded
+            if (container.querySelector('iframe')) return;
             
             container.classList.add('loading');
             
@@ -792,4 +782,31 @@
             
             iframe.onload = function() {
                 container.classList.remove('loading');
-                container
+                container.classList.add('loaded');
+                const thumbnail = container.querySelector('.video-thumbnail');
+                if (thumbnail) {
+                    thumbnail.style.display = 'none';
+                }
+            };
+            
+            container.appendChild(iframe);
+        }
+
+        function loadMoreVideos() {
+            const start = videosLoaded;
+            const end = Math.min(start + videosPerLoad, videos.length);
+            
+            for (let i = start; i < end; i++) {
+                const container = createVideoContainer(videos[i], i);
+                videoGrid.appendChild(container);
+                
+                if (i < 3) {
+                    setTimeout(() => loadVideo(container, videos[i]), i * 500);
+                }
+            }
+            
+            videosLoaded = end;
+            
+            if (videosLoaded >= videos.length) {
+                loadMoreBtn.style.display = 'none';
+            }
